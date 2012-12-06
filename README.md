@@ -6,8 +6,9 @@
 * `bundle install`
 
 ### Available tasks:
-    cap couchdb:install  # Install Couch DB (version 1.2.0) on Chromium OS.
     cap packages:install # Install predefined packages, check public/pkg for more. (see below)
+    cap couchdb:install  # Install Couch DB (version 1.2.0) on Chromium OS.
+    
 
 ### There are main packages (and their dependencies) that available for installing too:
 
