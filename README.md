@@ -1,17 +1,21 @@
-### This project create from clear image ChromiumOS sdk for couchdb development(Image ChromiumOS download from http://chromeos.hexxeh.net/)
-  
-###Packages:
-    * erlang
-    * couchdb
-    * elixir
-    * nginx
-    * nano
-    * sshpass
+### Useful recipe for installing the Couch DB (version 1.2.0) on Chromium OS (tested on http://chromeos.hexxeh.net/ build)
 
-###For use this:
+### Usage:
 * `git clone git@github.com:datahogs/chromium-os-couchdb-recipes.git`
 * `cd chromium-os-couchdb-recipes`
 * `bundle install`
-* `cap couchdb:install ip="you chromium ip"`
 
-###Also this project include flash, mp3, mp4
+### Available tasks:
+    cap couchdb:install  # Install Couch DB (version 1.2.0) on Chromium OS.
+    cap packages:install # Install predefined packages, check public/pkg for more. (see below)
+
+### There are main packages that available for deploy too:
+
+  * erlang
+  * elixir
+  * couchdb
+  * nginx
+  * nano
+  * sshpass
+
+for more see public/pkg directory
