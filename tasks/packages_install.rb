@@ -1,15 +1,28 @@
 namespace :packages do
   desc "Install predefined packages, check public/pkg for more."
   task :install do
-    Dir['public/pkg/*.xz'].each do |file|
-      put_sudo File.read(file), "/install_tmp/#{File.basename(file)}"
+    if ip = ENV['VNODE_IP']
+      server ip, :chronos, :sudo
+
+      sudo 'mount -o remount rw /'
+      sudo 'mkdir -p /install_tmp'
+
+      files = Dir['public/pkg/*.xz']
+
+      files.each do |file|
+        put_sudo File.read(file), "/install_tmp/#{File.basename(file)}"
+      end
+
+      #remove path to file
+      files = files.map { |file| file.split('/').last }
+      #install
+      install_pkgs(files)
+
+      sudo 'rm -rf /install_tmp'
+    else
+      puts "The Shromium node doesn't specified! Use 'cap couchdb:install VNODE_IP=192.168.1.1'"
     end
-
-    #remove path to file
-    files = files.map { |file| file.split('/').last }
-    install_pkgs(files)
   end
-
 
   def install_pkgs pkgs
     pkgs.each do |pkg|

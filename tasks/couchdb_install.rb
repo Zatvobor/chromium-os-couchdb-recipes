@@ -4,16 +4,13 @@ namespace :couchdb do
   task :install do
     if ip = ENV['VNODE_IP']
       server ip, :chronos, :sudo
-      remount
-      delete_tmp_file
-      create_tmp_install_folder
+      sudo 'mount -o remount rw /'
       create_couchdb_group
       create_couchdb_user
       get_perms_for_couchdb
       load_init_conf
       load_init_functions
       reload_ip_tables
-      delete_tmp_file
       create_symlink
       sudo 'reboot'
     else
@@ -58,17 +55,4 @@ def get_perms_for_couchdb
   sudo "chown -R couchdb:couchdb /var/lib/couchdb"
   sudo "mkdir -p /var/run/couchdb"
   sudo "chown -R couchdb:couchdb /var/run/couchdb"
-end
-
-#first remount system
-def remount
-  sudo 'mount -o remount rw /'
-end
-
-def create_tmp_install_folder
-  sudo 'mkdir /install_tmp'
-end
-
-def delete_tmp_file
-  sudo 'rm -rf /install_tmp'
 end
