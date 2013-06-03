@@ -14,7 +14,7 @@ namespace :couchdb do
       create_symlink
       sudo 'reboot'
     else
-      puts "The Shromium node doesn't specified! Use 'cap couchdb:install VNODE_IP=192.168.1.1'"
+      puts "The Chromium node doesn't specified! Use 'cap couchdb:install VNODE_IP=192.168.1.1'"
     end
   end
 end
